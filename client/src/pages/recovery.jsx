@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
 import logo from '../assets/images/avatar.png';
