@@ -4,6 +4,7 @@ import Username from './pages/username';
 import Register from './pages/register';
 import Profile from './pages/profile';
 import PasswordReset from './pages/password-reset';
+import Password from './pages/password';
 import PageNotFound from './pages/pageNotFound';
 
 /** routes */
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   },
   {
     path: '/password',
+    element: <Password />
+  },
+  {
+    path: '/recover-password',
     element: <PasswordReset />
   },
   {
