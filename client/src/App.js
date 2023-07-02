@@ -3,8 +3,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Username from './pages/username';
 import Register from './pages/register';
 import Profile from './pages/profile';
-import PasswordReset from './pages/password-reset';
+import PasswordRecovery from './pages/recovery';
 import Password from './pages/password';
+import PasswordReset from './pages/reset';
 import PageNotFound from './pages/pageNotFound';
 
 /** routes */
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   },
   {
     path: '/recover-password',
+    element: <PasswordRecovery />
+  },
+  {
+    path: '/reset-password',
     element: <PasswordReset />
   },
   {
