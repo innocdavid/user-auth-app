@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
 import logo from '../assets/images/avatar.png';
-import { validateUsername } from '../Helper/validate';
+import { validateUsername } from '../helper/validate';
 
 import styles from '../assets/styles/username.module.css';
 
@@ -34,11 +34,11 @@ export default function Username() {
               </div>
               <div className="textbot flex flex-col items-center gap-5">
                 <input {...formik.getFieldProps('username')}  type="text" placeholder="Username" className={styles.input_field}/>
-                <button type="submit" className={styles.btn}>Lets Go</button>
+                <button type="submit" className={styles.btn}>Let's Go</button>
               </div>
               <div className="text-center py-4">
                 <span className="text-gay-500">
-                  Not a member? <Link to="/register" className="text-blue-500">Register now!</Link>
+                  Not a member? <Link to="/register" className="text-sky-600">Register now!</Link>
                 </span>
               </div>
             </form>
