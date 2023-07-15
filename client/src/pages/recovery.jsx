@@ -10,10 +10,10 @@ export default function PasswordRecovery() {
   return (
     <div className="container mx-auto">
       <Toaster position='top-center' reverseOrder={false}></Toaster>
-      <div className="flex justify-center items-center mt-40">
+      <div className="flex justify-center items-center h-screen">
         <div className={styles.glass}>
           <div className="title flex flex-col items-center">
-            <h4 className="text-4xl font-bold mt-2">Recovery</h4>
+            <h4 className="text-4xl font-bold">Recovery</h4>
             <small className="py-2 text-xl w-5/6 text-center text-gray-500">
               Enter OTP to recover password.
             </small>
