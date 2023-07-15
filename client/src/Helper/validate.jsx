@@ -25,13 +25,13 @@ function verifyUsername(error = {}, values) {
 // validate password
 function verifyPassword(error = {}, values) {
 
-  const specialChars = /^(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+  const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
   if (!values.password) {
     error.password = toast.error('Password Required...!');
-  } else if (values.password.includes(' ')) {
+  } else if (values.password.includes(' ') || values.password.length === 0) {
     error.password = toast.error('Invalid Password...!');
-  } else if (values.password.length < 4) {
+  } else if (values.password.length < 6) {
     error.password = toast.error('Password Too Short...!');
   } else if (!specialChars.test(values.password)) {
     error.password = toast.error('Password must contain at least one special character');
