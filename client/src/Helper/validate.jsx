@@ -49,3 +49,24 @@ export async function validateResetPassword(values){
   return errors;
 }
 
+// validate fields on the register component
+export async function validateRegister(values) {
+  const errors = verifyEmail({}, values)
+  if (!errors) { 
+    return validateUsername((errors, values))
+  }
+  
+
+  return errors ;
+}
+
+// validate email
+function verifyEmail(error = {}, values) {
+  const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (!values.email) {
+    error.email = toast.error('Email Required...!');
+  } else if (!validEmail.test(values.email)) {
+    error.email = toast.error('Invalid Email Address');
+  }
+}
+
