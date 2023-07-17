@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import connect from './config/db.js';
+import router from './routes/user.js';
 
 const app = express();
 
@@ -16,6 +17,9 @@ app.disable('x-powered-by'); // conceal info about stack
 app.get('/api/', (req, res) => {
   res.status(201).json({ message: 'Home get Request'});
 });
+
+// routes
+app.use('/api', router);
 
 const PORT = 8080;
 const HOST = 'http//localhost';
