@@ -1,41 +1,40 @@
 import UserModel from '../models/user.js';
+import bcrypt from 'bcrypt';
 
 export async function register(req, res) {
   try {
     const { username, password, profile, email } = req.body;
-    // check for existing username
-    const existingUsername = new Promise((resolve, reject) => {
-      UserModel.findOne({ username }, (err, user) => {
-        if (err) reject(new Error(err));
-        if (user) reject({ error: 'Username already taken' })
+    
+    // Check for existing username
+    const existingUsername = await UserModel.findOne({ username });
+    if (existingUsername) {
+      return res.status(400).json({ error: 'Username already taken' });
+    }
 
-        resolve();
-      });
+    // Check for existing email address
+    const existingEmail = await UserModel.findOne({ email });
+    if (existingEmail) {
+      return res.status(400).json({ error: 'Email already taken' });
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = new UserModel({
+      username,
+      password: hashedPassword,
+      email,
+      profile: profile || '',
     });
 
-    Promise([existingEmail, existingEmail])
-      .then(() => {
-
-      }). catch(error => {
-        return res.status(500).json({
-          error: 'Enable hashed password'
-        })
-      })
-
-    // check for existing email address
-    const existingEmail = new Promise((resolve, reject) => {
-      UserModel.findOne({ email }, (err, email) => {
-        if (err) reject(new Error(err));
-        if (email) reject({ error: 'Email already taken' })
-
-        resolve();
-      });
-
-    });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
+    // Save the data
+    await user.save();
+    res.status(201).json({ message: 'User Registered Successfully' });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
   }
 }
+
 
 export async function login(req, res) {
   res.json('login route');
