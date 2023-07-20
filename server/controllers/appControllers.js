@@ -89,6 +89,7 @@ export async function login(req, res) {
 
     return res.status(200).json({
       username: user.username,
+      email: user.email,
       token,
       message: 'Login successful'
     });
@@ -97,10 +98,31 @@ export async function login(req, res) {
   }
 }
 
-
 export async function getUser(req, res) {
-  res.json('get user');
+  const { username } = req.params;
+  try {
+    if (!username) {
+      return res.status(400).json({ error: 'Please provide username or email' });
+    }
+
+    UserModel.findOne(
+      { username } ,
+      function (err, user) {
+        if (err) {
+          return res.status(500).json({ error: 'Internal server error' });
+        }
+        if (!user) {
+          return res.status(404).json({ error: 'User not found' });
+        }
+        return res.status(200).json({ user });
+      }
+    );
+
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
 }
+
 
 export async function updateUser(req, res) {
   res.json('update user');
